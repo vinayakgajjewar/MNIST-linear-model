@@ -24,11 +24,11 @@ y_true_cls = tf.placeholder(tf.int64, [None])
 weights = tf.Variable(tf.zeros([img_size_flat, num_classes]))
 biases = tf.Variable(tf.zeros([num_classes]))
 
-logits = tf.matmul(x, weights) + biases
-y_pred = tf.nn.softmax(logits)
+model = tf.matmul(x, weights) + biases
+y_pred = tf.nn.softmax(model)
 y_pred_cls = tf.argmax(y_pred, axis=1)
 
-cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=y_true)
+cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=model, labels=y_true)
 cost = tf.reduce_mean(cross_entropy)
 
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.5).minimize(cost)
@@ -72,27 +72,22 @@ def plot_weights():
 
 print("Without any training whatsoever:")
 print_accuracy()
-plot_weights()
 
 print("With one training iteration:")
 optimize(num_iterations=1)
 print_accuracy()
-plot_weights()
 
 print("With 10 training iterations:")
 optimize(num_iterations=9)
 print_accuracy()
-plot_weights()
 
 print("With 100 training iterations:")
 optimize(num_iterations=90)
 print_accuracy()
-plot_weights()
 
 print("With 1,000 training iterations:")
 optimize(num_iterations=900)
 print_accuracy()
-plot_weights()
 
 print("With 10,000 training iterations:")
 optimize(num_iterations=9000)
