@@ -1,14 +1,10 @@
 import matplotlib.pyplot as plt
 import tensorflow as tf
 import numpy as np
+import mnist
 
-from tensorflow.examples.tutorials.mnist import input_data
-data = input_data.read_data_sets("data/MNIST/", one_hot=True)
-
-print("Size of:")
-print("Training set:\t\t{}".format(len(data.train.labels)))
-print("Test set:\t\t{}".format(len(data.test.labels)))
-print("Validation set:\t\t{}".format(len(data.validation.labels)))
+data = mnist.get_MNIST("data/MNIST")
+mnist.print_sizes(data)
 
 img_size = 28
 img_size_flat = img_size * img_size
